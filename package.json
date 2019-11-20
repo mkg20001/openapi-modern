@@ -1,0 +1,22 @@
+{
+  "name": "openapi-modern",
+  "version": "0.0.1",
+  "description": "An attempt to write a modern OpenAPI generator using promises and node-fetch",
+  "main": "src/index.js",
+  "author": "Maciej Krüger <mkg20001@gmail.com>",
+  "license": "MPL-2.0",
+  "template": {
+    "extends": [
+      "node"
+    ]
+  },
+  "scripts": {
+    "test": "mocha -A",
+    "cov": "nyc mocha"
+  },
+  "devDependencies": {
+    "mkgs-tool": "^0.1.3",
+    "mocha": "*",
+    "nyc": "*"
+  }
+}
