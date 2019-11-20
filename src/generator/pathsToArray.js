@@ -14,19 +14,37 @@ module.exports = (paths) => {
       elements: []
     }
 
-    const s = path.split('/')
+    const s = path.split('/').slice(1)
 
-    const params = {}
+    const params = { path: {} }
 
-    ;(src.parameters || []).forEach(param => { // TODO: add via joi validation?
+    function addParam (param) {
       if (!params[param.in]) params[param.in] = {}
       params[param.in][param.name] = param
+    }
+
+    (src.parameters || []).forEach(param => { // TODO: add via joi validation?
+      addParam(param)
     })
 
     s.forEach(el => {
       let m
       if ((m = el.match(/^\{(.+)\}$/))) {
-        const { name, description, type, required } = params.path[m[1]]
+        let res = params.path && params.path[m[1]]
+
+        if (!res) {
+          res = {
+            name: m[1],
+            description: `Parameter ${JSON.stringify(m[1])}`,
+            type: 'string',
+            required: true,
+            in: 'path'
+          }
+
+          addParam(res)
+        }
+
+        const { name, description, type, required } = res
 
         o.elements.push({
           param: true,

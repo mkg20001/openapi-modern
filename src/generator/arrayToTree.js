@@ -21,8 +21,10 @@ module.exports = (array) => {
       if (el.param) {
         if (!c.params) {
           c.dynamic = true
-          c.params.push(el)
+          c.params = []
         }
+
+        c.params.push(el)
       } else if (el.sub) {
         c = c.child[el.name] = createTree(el.name)
       }
