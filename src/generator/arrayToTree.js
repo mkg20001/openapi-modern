@@ -3,11 +3,13 @@
 function createTree (name) {
   return {
     child: {},
+    sub: true,
     name
   }
 }
 
 function createLeaf (method) {
+  method.method = true
   return method // TODO: better structure
 }
 
