@@ -1,5 +1,19 @@
 'use strict'
 
+function functionObjectStringify (o) { // stringifies as object with strings treated as literal code
+  const a = []
+  for (const key in o) { // eslint-disable-line guard-for-in
+    let v = JSON.stringify(key) + ':'
+    if (typeof o[key] === 'object') {
+      v += functionObjectStringify(o[key])
+    } else {
+      v += o[key]
+    }
+    a.push(v)
+  }
+  return '{' + a.join(',') + '}'
+}
+
 module.exports = (tree, caseConvert) => {
   function processParams (params, l) {
     return `let pMin = ${params.filter(p => !p.required).length}
@@ -19,7 +33,7 @@ module.exports = (tree, caseConvert) => {
   }
 
   function expandTree (tree) {
-
+    return `merge(${functionObjectStringify(tree)})`
   }
 
   function processDynamic (node, tree, l) {
@@ -55,5 +69,5 @@ module.exports = (tree, caseConvert) => {
     return out
   }
 
-  return processSub(tree, iter(tree.child))
+  return processSub(tree, iter(tree.child, 0))
 }
