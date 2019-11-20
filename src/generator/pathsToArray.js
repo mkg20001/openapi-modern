@@ -10,7 +10,8 @@ module.exports = (paths) => {
 
     const o = {
       path,
-      methods: {}
+      methods: {},
+      elements: []
     }
 
     const s = path.split('/')
@@ -23,4 +24,6 @@ module.exports = (paths) => {
 
     out.push(o)
   }
+
+  return out
 }
