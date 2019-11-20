@@ -1,6 +1,6 @@
 'use strict'
 
-const Joi = require('@hapi/joi')
+const Joi = global.FAKE ? require('fake-joi') : require('@hapi/joi')
 
 const C = module.exports = {
   string: {

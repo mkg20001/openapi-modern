@@ -18,5 +18,9 @@
     "mkgs-tool": "^0.1.3",
     "mocha": "*",
     "nyc": "*"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "fake-joi": "^0.1.0"
   }
 }
